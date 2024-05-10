@@ -23,7 +23,7 @@ export async function getProfile(app: FastifyInstance) {
                 id: z.string().uuid(),
                 name: z.string().nullable(),
                 email: z.string().email(),
-                avatarUrl: z.string().email().nullable(),
+                avatarUrl: z.string().url().nullable(),
               }),
             }),
           },
@@ -47,7 +47,7 @@ export async function getProfile(app: FastifyInstance) {
         if (!user) {
           throw new BadRequestError('User not found')
         }
-
+        console.log(user)
         return reply.send({ user })
       },
     )
