@@ -95,6 +95,7 @@ export function SignUpForm() {
           <Link href="/auth/sign-in">Already registered? Sign in</Link>
         </Button>
       </form>
+
       <Separator />
 
       <form action={signInWithGithub}>
