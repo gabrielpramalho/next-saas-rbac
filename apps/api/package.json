@@ -39,6 +39,6 @@
   },
   "prettier": "@saas/prettier",
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "pnpm env:load tsx prisma/seed.ts"
   }
 }

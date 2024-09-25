@@ -7,7 +7,6 @@ import { auth } from '@/http/middlewares/auth'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
 
-import { BadRequestError } from '../_errors/bad-request-error'
 import { UnauthorizedError } from '../_errors/unauthorized-error'
 
 export async function updateOrganization(app: FastifyInstance) {
@@ -51,23 +50,6 @@ export async function updateOrganization(app: FastifyInstance) {
           throw new UnauthorizedError(
             `You're not allowed to update this organization`,
           )
-        }
-
-        if (domain) {
-          const organizationByDomain = await prisma.organization.findFirst({
-            where: {
-              domain,
-              slug: {
-                not: organization.id,
-              },
-            },
-          })
-
-          if (organizationByDomain) {
-            throw new BadRequestError(
-              'Another organization with same domain already exists',
-            )
-          }
         }
 
         await prisma.organization.update({
